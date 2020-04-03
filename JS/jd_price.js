@@ -40,7 +40,7 @@ if (url.indexOf(path2) != -1) {
             if (data.ok == 1 && data.single) {
                 const lower = lowerMsgs(data.single)
                 const detail = priceSummary(data)
-                const tip = data.PriceRemark.Tip + "（仅供参考）"
+                const tip = data.PriceRemark.Tip + ""
                 lowerword.data.ad.adword = `${lower} ${tip}\n${detail}`;
                 floors.insert(bestIndex, lowerword);
             }
@@ -58,7 +58,7 @@ if (url.indexOf(path2) != -1) {
 function lowerMsgs(data) {
     const lower = data.lowerPriceyh
     const lowerDate = dateFormat(data.lowerDateyh)
-    const lowerMsg = "〽️历史最低到手价：¥" + String(lower) + ` (${lowerDate}) `
+    const lowerMsg = "〽️历史最低价：¥" + String(lower) + ` (${lowerDate}) `
     return lowerMsg
 }
 
