@@ -106,7 +106,7 @@ function sendNotify(data, shareUrl) {
     if (data.ok == 1 && data.single) {
         const lower = lowerMsgs(data.single)[0]
         const detail = priceSummary(data)[1]
-        const tip = data.PriceRemark.Tip + "（仅供参考）"
+        const tip = data.PriceRemark.Tip + ""
         $tool.notify("", "", `〽️历史${lower} ${tip}\n${detail}\n\n👉查看详情：http://tool.manmanbuy.com/historyLowest.aspx?url=${encodeURI(shareUrl)}`)
     }
     if (data.ok == 0 && data.msg.length > 0) {
@@ -139,7 +139,7 @@ function setTradeConsumerProtection(data, tradeConsumerProtection) {
         const lower = lowerMsgs(data.single)
         const tip = data.PriceRemark.Tip
         const tbitems = priceSummary(data)[0]
-        const item = customItem(lower[1], `${lower[0]} ${tip}（仅供参考）`)
+        const item = customItem(lower[1], `${lower[0]} ${tip} `)
         let nonService = tradeConsumerProtection.tradeConsumerService.nonService
         service.items = service.items.concat(nonService.items)
         nonService.title = "价格详情"
@@ -155,7 +155,7 @@ function setTradeConsumerProtection(data, tradeConsumerProtection) {
 function lowerMsgs(data) {
     const lower = data.lowerPriceyh
     const lowerDate = dateFormat(data.lowerDateyh)
-    const lowerMsg = "最低到手价：¥" + String(lower) + `（${lowerDate}）`
+    const lowerMsg = "最低价：¥" + String(lower) + `（${lowerDate}）`
     const lowerMsg1 = "历史最低¥" + String(lower)
     return [lowerMsg, lowerMsg1]
 }
