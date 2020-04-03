@@ -121,7 +121,7 @@ function setConsumerProtection(data, consumerProtection) {
         const lower = lowerMsgs(data.single)
         const tip = data.PriceRemark.Tip
         const summary = priceSummary(data)[1]
-        const item = customItem(lower[1], [`${lower[0]} ${tip}（仅供参考）\n${summary}`])
+        const item = customItem(lower[1], [`${lower[0]} ${tip} \n${summary}`])
         basicService.services.unshift(item)
         items.unshift(item)
     }
@@ -195,9 +195,9 @@ function historySummary(single) {
             let price = parseFloat(result[2]);
             if (index == 0) {
                 currentPrice = price
-                lowest60 = { Name: "六十天最低", Price: `¥${String(price)}`, Date: date, Difference: difference(currentPrice, price), price }
-                lowest180 = { Name: "一百八最低", Price: `¥${String(price)}`, Date: date, Difference: difference(currentPrice, price), price }
-                lowest360 = { Name: "三百六最低", Price: `¥${String(price)}`, Date: date, Difference: difference(currentPrice, price), price }
+                lowest60 = { Name: "两个月最低", Price: `¥${String(price)}`, Date: date, Difference: difference(currentPrice, price), price }
+                lowest180 = { Name: "半年内最低", Price: `¥${String(price)}`, Date: date, Difference: difference(currentPrice, price), price }
+                lowest360 = { Name: "一年内最低", Price: `¥${String(price)}`, Date: date, Difference: difference(currentPrice, price), price }
             }
             if (index < 60 && price <= lowest60.price) {
                 lowest60.price = price
