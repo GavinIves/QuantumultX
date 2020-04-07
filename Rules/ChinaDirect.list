@@ -42,6 +42,15 @@ DOMAIN-SUFFIX,icloud-content.com,DIRECT
 DOMAIN-SUFFIX,me.com,DIRECT
 DOMAIN-SUFFIX,mzstatic.com,DIRECT
 DOMAIN,www-cdn.icloud.com.akadns.net,DIRECT
+# >> Microsoft OneDrive
+DOMAIN-SUFFIX,1drv.com,PROXY
+DOMAIN-SUFFIX,1drv.ms,PROXY
+DOMAIN-SUFFIX,blob.core.windows.net,PROXY
+DOMAIN-SUFFIX,livefilestore.com,PROXY
+DOMAIN-SUFFIX,onedrive.com,PROXY
+DOMAIN-SUFFIX,storage.live.com,PROXY
+DOMAIN-SUFFIX,storage.msn.com,PROXY
+DOMAIN,oneclient.sfx.ms,PROXY
 # > Baidu
 DOMAIN-SUFFIX,baidu.com,DIRECT
 DOMAIN-SUFFIX,baidubcr.com,DIRECT
