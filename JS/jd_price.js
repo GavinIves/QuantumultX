@@ -16,41 +16,22 @@ if (url.indexOf(path1) != -1) {
 }
 
 if (url.indexOf(path2) != -1) {
+    $done({ body });
     let obj = JSON.parse(body);
     const floors = obj.floors;
     const commodity_info = floors[floors.length - 1];
     const shareUrl = commodity_info.data.property.shareUrl;
     request_history_price(shareUrl, function (data) {
         if (data) {
-            const lowerword = adword_obj();
-            lowerword.data.ad.textColor = "#fe0000";
-            let bestIndex = 0;
-            for (let index = 0; index < floors.length; index++) {
-                const element = floors[index];
-                if (element.mId == lowerword.mId) {
-                    bestIndex = index + 1;
-                    break;
-                } else {
-                    if (element.sortId > lowerword.sortId) {
-                        bestIndex = index;
-                        break;
-                    }
-                }
-            }
             if (data.ok == 1 && data.single) {
                 const lower = lowerMsgs(data.single)
                 const detail = priceSummary(data)
-                const tip = data.PriceRemark.Tip + ""
-                lowerword.data.ad.adword = `${lower} ${tip}\n${detail}`;
-                floors.insert(bestIndex, lowerword);
+                const tip = data.PriceRemark.Tip + "（仅供参考）"
+                $tool.notify("", "", `${lower} ${tip}\n${detail}\n\n👉查看详情：http://tool.manmanbuy.com/historyLowest.aspx?url=${encodeURI(shareUrl)}`)
             }
             if (data.ok == 0 && data.msg.length > 0) {
-                lowerword.data.ad.adword = "⚠️ " + data.msg;
-                floors.insert(bestIndex, lowerword);
+                $tool.notify("", "", `⚠️ ${data.msg}`)
             }
-            $done({ body: JSON.stringify(obj) });
-        } else {
-            $done({ body });
         }
     })
 }
@@ -58,7 +39,7 @@ if (url.indexOf(path2) != -1) {
 function lowerMsgs(data) {
     const lower = data.lowerPriceyh
     const lowerDate = dateFormat(data.lowerDateyh)
-    const lowerMsg = "〽️历史最低价：¥" + String(lower) + ` (${lowerDate}) `
+    const lowerMsg = "〽️历史最低到手价：¥" + String(lower) + ` (${lowerDate}) `
     return lowerMsg
 }
 
@@ -68,14 +49,14 @@ function priceSummary(data) {
     listPriceDetail.pop()
     let list = listPriceDetail.concat(historySummary(data.single))
     list.forEach((item, index) => {
-        if (index == 2) {
+        if (item.Name == "双11价格") {
             item.Name = "双十一价格"
-        } else if (index == 3) {
+        } else if (item.Name == "618价格") {
             item.Name = "六一八价格"
-        } else if (index == 4) {
-            item.Name = "六十天最低"
+        } else if (item.Name == "30天最低价") {
+            item.Name = "三十天最低"
         }
-        summary += `\n${item.Name}${getSpace(8)}${item.Price}${getSpace(8)}${item.Date}${getSpace(8)}${item.Difference}`
+        summary += `\n${item.Name}   ${item.Price}   ${item.Date}   ${item.Difference}`
     })
     return summary
 }
@@ -95,8 +76,8 @@ function historySummary(single) {
             if (index == 0) {
                 currentPrice = price
                 lowest60 = { Name: "六十天最低", Price: `¥${String(price)}`, Date: date, Difference: difference(currentPrice, price), price }
-                lowest180 = { Name: "半年内最低", Price: `¥${String(price)}`, Date: date, Difference: difference(currentPrice, price), price }
-                lowest360 = { Name: "一年内最低", Price: `¥${String(price)}`, Date: date, Difference: difference(currentPrice, price), price }
+                lowest180 = { Name: "一百八最低", Price: `¥${String(price)}`, Date: date, Difference: difference(currentPrice, price), price }
+                lowest360 = { Name: "三百六最低", Price: `¥${String(price)}`, Date: date, Difference: difference(currentPrice, price), price }
             }
             if (index < 60 && price <= lowest60.price) {
                 lowest60.price = price
@@ -171,43 +152,9 @@ function dateFormat(cellval) {
     return date.getFullYear() + "-" + month + "-" + currentDate;
 }
 
-function getSpace(length) {
-    let blank = "";
-    for (let index = 0; index < length; index++) {
-        blank += " ";
-    }
-    return blank;
-}
-
-function adword_obj() {
-    return {
-        "bId": "eCustom_flo_199",
-        "cf": {
-            "bgc": "#ffffff",
-            "spl": "empty"
-        },
-        "data": {
-            "ad": {
-                "adword": "",
-                "textColor": "#8C8C8C",
-                "color": "#f23030",
-                "newALContent": true,
-                "hasFold": true,
-                "class": "com.jd.app.server.warecoresoa.domain.AdWordInfo.AdWordInfo",
-                "adLinkContent": "",
-                "adLink": ""
-            }
-        },
-        "mId": "bpAdword",
-        "refId": "eAdword_0000000028",
-        "sortId": 13
-    }
-}
-
 function tool() {
     const isSurge = typeof $httpClient != "undefined"
     const isQuanX = typeof $task != "undefined"
-    const isResponse = typeof $response != "undefined"
     const node = (() => {
         if (typeof require == "function") {
             const request = require('request')
@@ -221,21 +168,19 @@ function tool() {
         if (isSurge) $notification.post(title, subtitle, message)
         if (node) console.log(JSON.stringify({ title, subtitle, message }));
     }
-    const write = (value, key) => {
+    const setCache = (value, key) => {
         if (isQuanX) return $prefs.setValueForKey(value, key)
         if (isSurge) return $persistentStore.write(value, key)
     }
-    const read = (key) => {
+    const getCache = (key) => {
         if (isQuanX) return $prefs.valueForKey(key)
         if (isSurge) return $persistentStore.read(key)
     }
     const adapterStatus = (response) => {
-        if (response) {
-            if (response.status) {
-                response["statusCode"] = response.status
-            } else if (response.statusCode) {
-                response["status"] = response.statusCode
-            }
+        if (response.status) {
+            response["statusCode"] = response.status
+        } else if (response.statusCode) {
+            response["status"] = response.statusCode
         }
         return response
     }
@@ -275,7 +220,7 @@ function tool() {
             })
         }
     }
-    return { isQuanX, isSurge, isResponse, notify, write, read, get, post }
+    return { isQuanX, isSurge, notify, setCache, getCache, get, post }
 }
 
 Array.prototype.insert = function (index, item) {
