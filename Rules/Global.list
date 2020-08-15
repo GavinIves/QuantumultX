@@ -181,6 +181,7 @@ DOMAIN-SUFFIX,getsync.com,PROXY
 DOMAIN-SUFFIX,globalvoices.org,PROXY
 DOMAIN-SUFFIX,goo.ne.jp,PROXY
 DOMAIN-SUFFIX,goodreads.com,PROXY
+DOMAIN-SUFFIX,gov,PROXY
 DOMAIN-SUFFIX,gov.tw,PROXY
 DOMAIN-SUFFIX,greatfire.org,PROXY
 DOMAIN-SUFFIX,gumroad.com,PROXY
@@ -292,6 +293,7 @@ DOMAIN-SUFFIX,readmoo.com,PROXY
 DOMAIN-SUFFIX,redbubble.com,PROXY
 DOMAIN-SUFFIX,reddit.com,PROXY
 DOMAIN-SUFFIX,redditmedia.com,PROXY
+DOMAIN-SUFFIX,redditstatic.com,PROXY
 DOMAIN-SUFFIX,resilio.com,PROXY
 DOMAIN-SUFFIX,reuters.com,PROXY
 DOMAIN-SUFFIX,reutersmedia.net,PROXY
@@ -383,6 +385,7 @@ DOMAIN-KEYWORD,wikileaks,PROXY
 DOMAIN-SUFFIX,apartmentratings.com,PROXY
 DOMAIN-SUFFIX,apartments.com,PROXY
 DOMAIN-SUFFIX,bankmobilevibe.com,PROXY
+DOMAIN-SUFFIX,bing.com,PROXY
 DOMAIN-SUFFIX,booktopia.com.au,PROXY
 DOMAIN-SUFFIX,cccat.io,PROXY
 DOMAIN-SUFFIX,centauro.com.br,PROXY
@@ -423,6 +426,7 @@ DOMAIN-SUFFIX,uploader.jp,PROXY
 DOMAIN-SUFFIX,vevo.com,PROXY
 DOMAIN-SUFFIX,viu.tv,PROXY
 DOMAIN-SUFFIX,vk.com,PROXY
+DOMAIN-SUFFIX,vsco.co,PROXY
 DOMAIN-SUFFIX,xfinity.com,PROXY
 DOMAIN-SUFFIX,zattoo.com,PROXY
 USER-AGENT,Roam*,PROXY
@@ -474,6 +478,7 @@ DOMAIN-SUFFIX,admin.recaptcha.net,PROXY
 DOMAIN-SUFFIX,recaptcha.net,PROXY
 DOMAIN-SUFFIX,shattered.io,PROXY
 DOMAIN-SUFFIX,synergyse.com,PROXY
+DOMAIN-SUFFIX,telephony.goog,PROXY
 DOMAIN-SUFFIX,tensorflow.org,PROXY
 DOMAIN-SUFFIX,tfhub.dev,PROXY
 DOMAIN-SUFFIX,tiltbrush.com,PROXY
@@ -487,7 +492,16 @@ DOMAIN-SUFFIX,x.company,PROXY
 DOMAIN-SUFFIX,youtu.be,PROXY
 DOMAIN-SUFFIX,yt.be,PROXY
 DOMAIN-SUFFIX,ytimg.com,PROXY
-
+# > Microsoft
+# >> Microsoft OneDrive
+DOMAIN-SUFFIX,1drv.com,PROXY
+DOMAIN-SUFFIX,1drv.ms,PROXY
+DOMAIN-SUFFIX,blob.core.windows.net,PROXY
+DOMAIN-SUFFIX,livefilestore.com,PROXY
+DOMAIN-SUFFIX,onedrive.com,PROXY
+DOMAIN-SUFFIX,storage.live.com,PROXY
+DOMAIN-SUFFIX,storage.msn.com,PROXY
+DOMAIN,oneclient.sfx.ms,PROXY
 # > Other
 DOMAIN-SUFFIX,0rz.tw,PROXY
 DOMAIN-SUFFIX,4bluestones.biz,PROXY
