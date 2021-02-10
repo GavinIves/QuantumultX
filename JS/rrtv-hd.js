@@ -16,7 +16,7 @@ obj.data = {
     "canShowVip": false,
     "initialQuality": false
   }, {
-    "qualityDescription": "原画",
+    "qualityDescription": "原画1",
     "qualityCode": "OD",
     "canPlay": true,
     "canShowVip": false,
