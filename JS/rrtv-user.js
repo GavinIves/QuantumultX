@@ -24,7 +24,7 @@ obj.data = {
         "loginFrom": null,
         "token": null,
         "mobile": "18550587393",
-        "nickName": "IVES-",
+        "nickName": "IVES-G",
         "isSilence": false,
         "silenceMsg": "",
         "isBlack": false,
