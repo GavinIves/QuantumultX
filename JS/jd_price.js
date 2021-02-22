@@ -85,6 +85,7 @@ function priceSummary(data) {
         } else if (item.Name == "30天最低价") {
             item.Name = "三十天最低"
         }
+        summary += `${item.Name}${getSpace(8)}${item.Price}${getSpace(8)}${item.Date}${getSpace(8)}${item.Difference}`
     })
     return summary
 }
