@@ -3,6 +3,15 @@ var nowall_proxy = "DIRECT;";
 var direct = "DIRECT;";
 var ip_proxy = "DIRECT;";
 
+
+/*
+ * Copyright (C) 2014 breakwa11
+ * https://github.com/MatcherAny/whitelist.pac/blob/master/whitelist.pac
+ */
+
+
+
+
 var white_domains = {
 "live":{
 "zhuafan":1,
