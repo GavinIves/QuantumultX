@@ -1,6 +1,6 @@
 let body = $request.body
 let url=$request.url
-const randomFloat = Math.random()*0.001;
+const randomFloat = Math.random()*0.0001;
 if (url.includes("employee/location.serv")) {
 body=JSON.parse(body)
 body["body"]["gpslat"]=Number((31.360688169596311+randomFloat).toFixed(15))
